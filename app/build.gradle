@@ -42,6 +42,18 @@ android {
             versionNameSuffix "-full"
         }
     }
+    /* ./gradlew test */
+    testOptions{
+        testOptions {
+            unitTests.includeAndroidResources = true
+            unitTests.all {
+                reports {
+                    junitXml.enabled = true
+                    html.enabled = false
+                }
+            }
+        }
+    }
     /**
      * Add lintOptions to the gradle plugin
      *
@@ -51,11 +63,12 @@ android {
      * lint checks etc).
      * @Reference https://android-review.googlesource.com/q/I2c14282165c3c772b7c4e6fbcb2cae978ebd3eb0
      */
+    /* ./gradlew lint */
     lintOptions {
         // if true, stop the gradle build if errors are found
         abortOnError false
-
     }
+
 }
 
 dependencies {
