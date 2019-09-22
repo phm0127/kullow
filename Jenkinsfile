@@ -23,5 +23,21 @@ pipeline {
         }
       }
     }
+    stage('Test') {
+      parallel {
+        stage('Unit Test') {
+          agent any
+          steps {
+            sh './gradlew test'
+          }
+        }
+        stage('Lint') {
+          agent any
+          steps {
+            sh './gradlew lint'
+          }
+        }
+      }
+    }
   }
 }
