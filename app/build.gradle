@@ -18,10 +18,43 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+            ext.enableCrashlytics = false
+        }
     }
+    flavorDimensions "version"
+    productFlavors{
+        // 빌드 변형 구성, 빌드 속도 최적화
+        // https://developer.android.com/studio/build/build-variants.html
+        demo {
+            dimension "version"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+        }
+        full {
+            dimension "version"
+            applicationIdSuffix ".full"
+            versionNameSuffix "-full"
+        }
+    }
+    /* ./gradlew test */
+    testOptions{
+        testOptions {
+            unitTests.includeAndroidResources = true
+            unitTests.all {
+                reports {
+                    junitXml.enabled = true
+                    html.enabled = false
+                }
+            }
+        }
+    }
+
     /**
      * Add lintOptions to the gradle plugin
      *
