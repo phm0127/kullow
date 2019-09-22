@@ -2,12 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      agent {
-        node {
-          label 'App'
-        }
-
-      }
+      agent any
       steps {
         sh './gradlew clean build -x lint --refresh-dependencies'
       }
@@ -15,25 +10,15 @@ pipeline {
     stage('Test') {
       parallel {
         stage('Unit Test') {
-          agent {
-            node {
-              label 'app'
-            }
-
-          }
+          agent any
           steps {
-            sh './gradlew test --stacktrace'
+            sh './gradlew :app:test --stacktrace'
           }
         }
         stage('Lint') {
-          agent {
-            node {
-              label 'app'
-            }
-
-          }
+          agent any
           steps {
-            sh './gradlew lint --stacktrace'
+            sh './gradlew :app:lint --stacktrace'
           }
         }
       }
