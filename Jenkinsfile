@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh './gradlew clean build -x lint'
+        sh './gradlew clean build -x lint --refresh-dependencies'
       }
     }
     stage('Test') {
