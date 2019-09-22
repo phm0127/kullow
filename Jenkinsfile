@@ -2,12 +2,6 @@ pipeline {
   agent none
   stages {
     stage('Build') {
-      agent {
-        node {
-          label 'Android'
-        }
-
-      }
       steps {
         sh './gradlew clean build -x lint test'
       }
@@ -15,7 +9,6 @@ pipeline {
     stage('Test') {
       parallel {
         stage('Unit Test') {
-          agent any
           steps {
             sh './gradlew test'
           }
