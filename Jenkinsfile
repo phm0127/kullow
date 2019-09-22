@@ -10,12 +10,12 @@ pipeline {
       parallel {
         stage('Unit Test') {
           steps {
-            sh './gradlew test'
+            sh './gradlew test --stacktrace'
           }
         }
         stage('Lint') {
           steps {
-            sh './gradlew lint'
+            sh './gradlew lint --stacktrace'
           }
         }
       }
