@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'Android'
-    }
-
-  }
+  agent none
   stages {
     stage('Build') {
       agent {
