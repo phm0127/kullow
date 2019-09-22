@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh './gradlew clean build'
+        sh './gradlew clean build -x lint test'
       }
     }
     stage('Test') {

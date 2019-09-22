@@ -54,7 +54,6 @@ android {
             }
         }
     }
-
     /**
      * Add lintOptions to the gradle plugin
      *
@@ -62,16 +61,19 @@ android {
      * customize how lint is run with all the same flags available to
      * the command line runner (except for the flags querying available
      * lint checks etc).
-     * @Copyright https://android-review.googlesource.com/q/I2c14282165c3c772b7c4e6fbcb2cae978ebd3eb0
+     * @Reference https://android-review.googlesource.com/q/I2c14282165c3c772b7c4e6fbcb2cae978ebd3eb0
      */
+    /* ./gradlew lint */
     lintOptions {
-        // if true, stop the gradle build if errors are found
+
+        // Don't abort if Lint finds an error, otherwise the Jenkins build
+        // will be marked as failed, and Jenkins won't analyse the Lint output
         abortOnError false
     }
+
 }
 
 dependencies {
-//    implementation project(':app')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
