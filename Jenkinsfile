@@ -12,13 +12,13 @@ pipeline {
         stage('Unit Test') {
           agent any
           steps {
-            sh './gradlew :app:test --stacktrace'
+            sh './gradlew app:test --stacktrace'
           }
         }
         stage('Lint') {
           agent any
           steps {
-            sh './gradlew :app:lint --stacktrace'
+            sh './gradlew app:lint --stacktrace'
           }
         }
       }
