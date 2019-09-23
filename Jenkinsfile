@@ -2,18 +2,9 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      parallel {
-        stage('Build') {
-          agent any
-          steps {
-            sh './gradlew clean build -x lint test'
-          }
-        }
-        stage('Slack Notification') {
-          steps {
-            slackSend(channel: '#ci', message: '*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\\n More info at: ${env.BUILD_URL}')
-          }
-        }
+      agent any
+      steps {
+        sh './gradlew clean build -x lint test'
       }
     }
     stage('Test') {
@@ -30,6 +21,12 @@ pipeline {
             sh './gradlew lint'
           }
         }
+      }
+    }
+    stage('Notification') {
+      agent any
+      steps {
+        slackSend(message: '"Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"', channel: '#ci')
       }
     }
   }
