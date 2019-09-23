@@ -3,17 +3,10 @@ pipeline {
   stages {
     stage('Build') {
       agent any
-      try{
-          notifyBuild('STARTED')
-          steps {
-            sh './gradlew clean build -x lint test'
-          }
-      } catch(e){
-          // If there was an exception thrown, the build failed
-          currentBuild.result = "FAILED"
-      }finally {
-          // Success or failure, always send notifications
-          notifyBuild(currentBuild.result)
+      steps {
+        notifyBuild('STARTED')
+        sh './gradlew clean build -x lint test'
+        
       }
     }
     stage('Test') {
