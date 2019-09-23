@@ -26,6 +26,14 @@ pipeline {
       }
     }
   }
+  post {
+    success{
+      notifyBuild('SUCCESS')
+    }
+    failure{
+      notifyBuild('FAILURE')
+    }
+  }
 }
 
 // 20190923 Slack Notification Function 
