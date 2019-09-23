@@ -38,8 +38,8 @@ pipeline {
   }
 }
 
-# 20190923 Slack Notification Function 
-# @Reference https://committed.software/posts/jenkins/slackNotifications/
+// 20190923 Slack Notification Function 
+// @Reference https://committed.software/posts/jenkins/slackNotifications/
 def notifyBuild(String buildStatus = 'STARTED', String colorCode = '#5492f7', String notify = '') {
 
   def project = 'KULLOW'
